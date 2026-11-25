@@ -1,0 +1,121 @@
+programa {
+  funcao inicio() {
+
+
+    cadeia nomes[100], postos[100], datas[100], horarios[100]
+    cadeia nome, posto, data, horario
+    inteiro total_reserva, opcao, i
+
+
+
+
+    logico disponivel
+
+
+    total_reserva = 0
+    opcao = 0
+
+
+    enquanto (opcao != 3) {
+
+
+      escreva("\n================================\n")
+      escreva("     SISTEMA DE RESERVAS\n")
+      escreva("================================\n")
+      escreva("1 - Realizar reserva\n")
+      escreva("2 - Consultar reservas\n")
+      escreva("3 - Encerrar sistema\n")
+      escreva("Escolha uma opção: ")
+      leia(opcao)
+
+
+      // REALIZAR RESERVA
+      se (opcao == 1) {
+
+
+        se (total_reserva < 100) {
+
+
+          escreva("\nInforme seu nome completo: ")
+          leia(nome)
+
+
+          escreva("Informe seu posto ou graduacao: ")
+          leia(posto)
+
+
+          escreva("Informe a data (DD/MM/AAAA): ")
+          leia(data)
+
+
+          escreva("Informe o horario (HH:MM): ")
+          leia(horario)
+
+
+          disponivel = verdadeiro
+
+
+          // VERIFICAR DISPONIBILIDADE
+          para (i = 0; i < total_reserva; i++) {
+
+
+            se (datas[i] == data e horarios[i] == horario) {
+              disponivel = falso
+            }
+          }
+          // CONFIRMAR OU RECUSAR RESERVA
+          se (disponivel == verdadeiro) {
+
+
+            nomes[total_reserva] = nome
+            postos[total_reserva] = posto
+            datas[total_reserva] = data
+            horarios[total_reserva] = horario
+
+
+            total_reserva = total_reserva + 1
+
+
+            escreva("\n================================\n")
+            escreva(" SUA RESERVA FOI CONFIRMADA!\n")
+            escreva("================================\n")
+            escreva("Solicitante: ", nome, "\n")
+            escreva("Posto/Graduacao: ", posto, "\n")
+            escreva("Data: ", data, "\n")
+            escreva("Horario: ", horario, "\n")
+            escreva("================================\n")
+          } senao {
+            escreva("\nSALA INDISPONIVEL!\n")
+            escreva("Esse horario ja possui uma reserva.\n")
+            escreva("Escolha outra data ou horario.\n")
+          }
+        } senao {
+          escreva("\nLimite de 100 reservas atingido!\n")
+        }
+      }
+      // CONSULTAR RESERVAS
+      senao se (opcao == 2) {
+        escreva("\n======= AGENDA DE RESERVAS =======\n")
+        se (total_reserva == 0) {
+          escreva("Nenhuma reserva cadastrada.\n")
+        } senao {
+          para (i = 0; i < total_reserva; i++) {
+            escreva("\nReserva numero: ", i + 1, "\n")
+            escreva("Solicitante: ", nomes[i], "\n")
+            escreva("Posto/Graduacao: ", postos[i], "\n")
+            escreva("Data: ", datas[i], "\n")
+            escreva("Horario: ", horarios[i], "\n")
+            escreva("--------------------------------\n")
+          }
+        }
+      }
+      // ENCERRAR SISTEMA
+      senao se (opcao == 3) {
+        escreva("\nEncerrando sistema...\n")
+      }
+      senao {
+        escreva("\nOpcao invalida! Tente novamente.\n")
+      }
+    }
+    escreva("\nSistema encerrado. Obrigado!\n")
+  }
